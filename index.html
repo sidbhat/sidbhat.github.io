@@ -1,608 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta name="google-site-verification" content="Jvp56hjNB9jFd_nAa1hBjD7dfjcwQtYV53dYaOoxsKk" />
-  <title>SuccessFactors HXM Suite </title>
-  <meta content="Transform human capital management (HCM) with SAP SuccessFactors." name="description">
-  <meta name="keywords" content="human resource management, hcm, sap successfactors, hrm, hr software, human capital management, hcm software, hr solutions, hr cloud, hr system, global hr, hcm systems, human resources software, SAP HR, SAP HCM "/>
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: HXM Presales Microsite - v4.9.1
-  * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-  <!-- Start of LiveChat (www.livechat.com) code -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f8f5;
+        }
+        h1 {
+            text-align: center;
+            color: #4a4a4a;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        .input-column {
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .image-column {
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        button {
+            background-color: #10a37f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0d8c6f;
+        }
+        #generatedImage {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #loadingIndicator {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #10a37f;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
-
 <body>
+    <h1>AI Image Generator</h1>
+    <div class="container">
+        <div class="input-column">
+            <label for="imageStyle">Image Style:</label>
+            <select id="imageStyle" name="imageStyle">
+                <option value="">Select a style</option>
+                <option value="cyberpunk">Cyberpunk</option>
+                <option value="vaporwave">Vaporwave</option>
+                <option value="steampunk">Steampunk</option>
+                <option value="art_nouveau">Art Nouveau</option>
+                <option value="ukiyo_e">Ukiyo-e</option>
+                <option value="retro_futurism">Retro-futurism</option>
+                <option value="synthwave">Synthwave</option>
+                <option value="solarpunk">Solarpunk</option>
+                <option value="dieselpunk">Dieselpunk</option>
+                <option value="afrofuturism">Afrofuturism</option>
+            </select>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center justify-content-lg-between">
+            <label for="promptSelector">Select Prompt:</label>
+            <select id="promptSelector" name="promptSelector">
+                <option value="">First select a style</option>
+            </select>
 
-      <h1 class="logo me-auto me-lg-0"><a href="index.html">SuccessFactors HXM Suite<span>.</span></a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            <label for="prompt">Prompt:</label>
+            <input type="text" id="prompt" name="prompt" value="Ukiyo-e. blueprint of a robobee, intricate, cinematic, 4k resolution, dramatic lighting, trending on artstation, 8k resolution" required>
 
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">Our Success</a></li>
-          <li><a class="nav-link scrollto" href="#features">Features</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+            <label for="width">Width:</label>
+            <input type="number" id="width" name="width" value="600" min="1" max="2048">
 
-      <a href="#about" class="get-started-btn scrollto">Get Started</a>
+            <label for="height">Height:</label>
+            <input type="number" id="height" name="height" value="600" min="1" max="2048">
 
-    </div>
-  </header><!-- End Header -->
+            <label for="seed">Seed:</label>
+            <input type="number" id="seed" name="seed" value="1" min="1">
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center justify-content-center">
-    <div class="container" data-aos="fade-up">
+            <label for="model">Model:</label>
+            <select id="model" name="model">
+                <option value="flux">flux</option>
+                <option value="turbo">turbo</option>
+            </select>
 
-      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-        <div class="col-xl-6 col-lg-8">
-          <h1>Reinventing HR and Shaping the Future of Work<span>.</span></h1>
-          <h2>We help organisations deliver better results by putting people at the heart of everything they do.</h2>
+            <label><input type="checkbox" id="nologo" name="nologo" checked> No Logo</label>
+            <label><input type="checkbox" id="nofeed" name="nofeed" checked> No Feed</label>
+            <label><input type="checkbox" id="enhance" name="enhance"> Enhance</label>
+
+            <button id="generateButton" type="button">Generate Image</button>
         </div>
-      </div>
-
-      <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-store-line"></i>
-            <h3><a href="">Employee Experience Management</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line"></i>
-            <h3><a href="">Core HR & Payroll</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-paint-brush-line"></i>
-            <h3><a href="">Recruiting & Onboarding</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-database-2-line"></i>
-            <h3><a href="">Talent Management</a></h3>
-          </div>
-        </div>
-        <div class="col-xl-2 col-md-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="">HR Analytics & Workforce Planning</a></h3>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section><!-- End Hero -->
-
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
-            <h3>Our success in numbers</h3>
-            <p class="fst-italic">
-              Millions of ​ people are already enjoying the benefits of an easy & holistic human talent management experience.
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> 218M+  Users</li>
-              <li><i class="ri-check-double-line"></i> 13K+ Customers</li>
-              <li><i class="ri-check-double-line"></i> 1000+ Go-Lives in 2021</li>
-              <li><i class="ri-check-double-line"></i> 320+ partner applications</li>
-              <li><i class="ri-check-double-line"></i> 2000+ regulatory changes delivered in 2021</li>
-            </ul>
-            <p>
-              SuccessFactors HXM Suite is designed around employees – how they work, what they need, and what motivates them.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Section -->
-
-    <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients">
-      <div class="container" data-aos="zoom-in">
-
-        <div class="clients-slider swiper">
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Clients Section -->
-
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="image col-lg-6" style='background-image: url("assets/img/features.jpg");' data-aos="fade-right"></div>
-          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
-            <div class="icon-box mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
-              <i class="bx bx-receipt"></i>
-              <h4>Core HR and payroll</h4>
-              <p>Create consistent and standardized HR processes</p>
+        <div class="image-column">
+            <div id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Generating image...</p>
             </div>
-            <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
-              <i class="bx bx-cube-alt"></i>
-              <h4>Talent management</h4>
-              <p>Attract the best talent to create a more diverse workforce  </p>
-            </div>
-            <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
-              <i class="bx bx-images"></i>
-              <h4>HR analytics and workforce planning</h4>
-              <p>Make faster, more informed decisions based on data-driven insights</p>
-            </div>
-            <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
-              <i class="bx bx-shield"></i>
-              <h4>Employee experience management</h4>
-              <p>Keep employees engaged and happy</p>
-            </div>
-          </div>
+            <div id="imageContainer"></div>
         </div>
-
-      </div>
-    </section> <!--End Features Section -->
-
-    <!-- ======= Services Section =======
-    <section id="services" class="services">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Services</h2>
-          <p>Check our Services</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Sed ut perspiciatis</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-slideshow"></i></div>
-              <h4><a href="">Dele cardo</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-arch"></i></div>
-              <h4><a href="">Divera don</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section> End Services Section -->
-
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
-
-        <div class="text-center">
-          <h3>Connect HR across your business</h3>
-          <p> Establish a single source of HR data across operations by connecting SAP SuccessFactors solutions with other solutions, you can enable enterprise-wide processes, experiences, and insights.</p>
-          <a class="cta-btn" href="#">Learn more</a>
-        </div>
-
-      </div>
-    </section><!-- End Cta Section -->
-
-
-
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row no-gutters">
-          <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start" data-aos="fade-right" data-aos-delay="100"></div>
-          <div class="col-xl-7 ps-0 ps-lg-5 pe-lg-1 d-flex align-items-stretch" data-aos="fade-left" data-aos-delay="100">
-            <div class="content d-flex flex-column justify-content-center">
-              <h3>Our success in numbers</h3>
-              <p>
-                Maximize the value of HR
-              </p>
-              <div class="row">
-                <div class="col-md-6 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="bi bi-emoji-smile"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="320" data-purecounter-duration="2" class="purecounter"></span>
-                    <p><strong>Partner apps</strong> </p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="bi bi-journal-richtext"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="13000" data-purecounter-duration="2" class="purecounter"></span>
-                    <p><strong>Customers</strong></p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="bi bi-clock"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="4" class="purecounter"></span>
-                    <p><strong>Go-Lives</strong> in 2021</p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="bi bi-award"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="2000" data-purecounter-duration="4" class="purecounter"></span>
-                    <p><strong>Regulatory changes</strong> in 2021</p>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End .content-->
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Counts Section -->
-
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container" data-aos="zoom-in">
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials1.jpg" class="testimonial-img" alt="">
-                <h3>Mark Morrissey</h3>
-                <h4>VP Global HR Operations, Whirlpool Corporation</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Using SAP SuccessFactors solutions, we now have standardized HR processes and data-driven insights across the globe, helping us achieve excellence in global talent planning and HR management.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials5.jpg" class="testimonial-img" alt="">
-                <h3>Gabriel de Diego</h3>
-                <h4>HR Strategy and Transformation Director
-                Telefónica S.A</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                With support from SAP, we have been able to extend the functionality in SAP SuccessFactors solutions to create an innovative solution that helps employees identify and develop the skills that will be vital in the digital world and the future of our company.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
-
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Team</h2>
-          <p>Check our Team</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Walter White</h4>
-                <span>HXM Account Executive</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="200">
-              <div class="member-img">
-                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="300">
-              <div class="member-img">
-                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>Solution Architect</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="400">
-              <div class="member-img">
-                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Solution Advisor</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Team Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Contact</h2>
-          <p>Contact Us</p>
-        </div>
-
-        <div>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3056.914088871672!2d-75.41755048446343!3d39.988025189523995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6eb9c66d4ec99%3A0x3790665082496960!2s3999%20West%20Chester%20Pike%2C%20Newtown%20Square%2C%20PA%2019073!5e0!3m2!1sen!2sus!4v1669215516306!5m2!1sen!2sus" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-
-        <div class="row mt-5">
-
-          <div class="col-lg-4">
-            <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>3999 West Chester Pike, Newtown Square, 19073</p>
-              </div>
-
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>info@sap.com</p>
-              </div>
-
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+1 610 661 1000</p>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="footer-info">
-              <h3>SAP Successfactors<span>.</span></h3>
-              <p>
-              3999 West Chester Pike<br>
-             Newtown Square, 19073 USA<br><br>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@sap.com<br>
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Sign up to learn more about our product</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-
-          </div>
-
-        </div>
-      </div>
     </div>
 
+    <script>
+        const prompts = {
+            cyberpunk: [
+                "Neon-lit alleyway with holographic advertisements, cybernetic implants store",
+                "Futuristic megacity skyline with flying cars and data streams",
+                "Cyberpunk hacker in a virtual reality interface, surrounded by code"
+            ],
+            vaporwave: [
+                "Retro computer setup with pink and teal lighting, palm trees in background",
+                "Glitchy sunset over a pixelated ocean, with floating geometric shapes",
+                "Ancient Greek statue wearing sunglasses, surrounded by neon signs"
+            ],
+            steampunk: [
+                "Victorian-era airship with brass gears and steam engines",
+                "Steampunk laboratory filled with clockwork inventions and Tesla coils",
+                "Mechanical butterfly with intricate gears and copper wings"
+            ],
+            art_nouveau: [
+                "Elegant woman with flowing hair surrounded by intricate floral patterns",
+                "Stained glass window depicting a peacock with elaborate feathers",
+                "Art Nouveau style poster for a celestial-themed masquerade ball"
+            ],
+            ukiyo_e: [
+                "Great wave off Kanagawa reimagined with modern Tokyo skyline",
+                "Samurai warrior facing off against a robotic opponent, Mount Fuji in background",
+                "Cherry blossom viewing scene with people in traditional and futuristic clothing"
+            ],
+            retro_futurism: [
+                "1950s family watching a holographic TV in a bubble house on Mars",
+                "Retro-style robot maid serving breakfast in a space-age kitchen",
+                "Flying car drive-in movie theater floating among the clouds"
+            ],
+            synthwave: [
+                "Neon grid landscape with low-poly mountains and a giant sun",
+                "80s sports car speeding down a glossy road towards a futuristic city",
+                "Retro arcade with synth-wave inspired cabinet designs and neon lighting"
+            ],
+            solarpunk: [
+                "Eco-friendly city with vertical gardens, solar panels, and sustainable technology",
+                "Treehouse community connected by bridges, powered by renewable energy",
+                "Solarpunk farmer tending to high-tech greenhouse in a lush, green cityscape"
+            ],
+            dieselpunk: [
+                "Massive diesel-powered war machine rolling through a 1940s inspired city",
+                "Art Deco skyscraper with smoke-belching factories and zeppelins overhead",
+                "Dieselpunk mechanic working on a heavily modified vintage car"
+            ],
+            afrofuturism: [
+                "Wakanda-inspired futuristic African city with advanced technology",
+                "Space station adorned with African tribal patterns and staffed by astronauts in Afrocentric suits",
+                "Afrofuturist musical performance with holographic instruments and traditional African elements"
+            ]
+        };
 
-  </footer><!-- End Footer -->
+        const styleSelect = document.getElementById('imageStyle');
+        const promptSelect = document.getElementById('promptSelector');
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        styleSelect.addEventListener('change', function() {
+            const selectedStyle = this.value;
+            promptSelect.innerHTML = '<option value="">Select a prompt</option>';
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+            if (selectedStyle && prompts[selectedStyle]) {
+                prompts[selectedStyle].forEach(prompt => {
+                    const option = document.createElement('option');
+                    option.value = prompt;
+                    option.textContent = prompt;
+                    promptSelect.appendChild(option);
+                });
+            }
+        });
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <script>
-      window.__lc = window.__lc || {};
-      window.__lc.license = 14738856;
-      ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
-  </script>
-  <noscript><a href="https://www.livechat.com/chat-with/14738856/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
-  <!-- End of LiveChat code -->
+        promptSelect.addEventListener('change', function() {
+            document.getElementById('prompt').value = this.value;
+        });
 
+        document.getElementById('generateButton').addEventListener('click', function() {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            loadingIndicator.style.display = 'block';
+
+            const prompt = encodeURIComponent(document.getElementById('prompt').value);
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
+            const seed = document.getElementById('seed').value;
+            const model = document.getElementById('model').value;
+            const nologo = document.getElementById('nologo').checked ? 'true' : '';
+            const nofeed = document.getElementById('nofeed').checked ? 'true' : '';
+            const enhance = document.getElementById('enhance').checked ? 'true' : '';
+
+            let url = `https://image.pollinations.ai/prompt/${prompt}?width=${width}&height=${height}&seed=${seed}&model=${model}`;
+            if (nologo) url += `&nologo=${nologo}`;
+            if (nofeed) url += `&nofeed=${nofeed}`;
+            if (enhance) url += `&enhance=${enhance}`;
+
+            const imageContainer = document.getElementById('imageContainer');
+            const img = new Image();
+            img.onload = function() {
+                loadingIndicator.style.display = 'none';
+                imageContainer.innerHTML = `
+                    <img id="generatedImage" src="${url}" alt="Generated Image">
+                    <button id="downloadButton">Download Image</button>
+                `;
+                document.getElementById('downloadButton').addEventListener('click', function() {
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'generated-image.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+            };
+            img.src = url;
+        });
+    </script>
 </body>
-
 </html>
