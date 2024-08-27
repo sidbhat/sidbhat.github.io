@@ -1,0 +1,325 @@
+<html><head><base href="https://retro-ai-assistant.com/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel Fortune Generator - Sid Bhattacharya</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        retro: {
+          primary: '#ff6b6b',
+          secondary: '#4ecdc4',
+          accent: '#feca57',
+          dark: '#2c3e50',
+          light: '#ecf0f1',
+        },
+      },
+    },
+  },
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  
+  body {
+    font-family: 'Press Start 2P', cursive;
+    background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABVUlEQVR4nO2XMUoDQRSGv0rERgQbC0s7wUbwAFZ6Aa9g4QG8gXgDS0FQyAG8gJVgZWGjjY2NWAgWFhKLKDLC/MXssm52ZjYmu4V58MP+O+/N+5mdnTcLFfXUBnaAY+AKGAIvwBh4A+6BC+AQWMp lXIX+vgN6wDXwDnwkrE/gEegC6xm868A50EvgfQEXQKeE97EsYBe4Bd5TeL+AK2AjgX0GHAAfiu8BOEjwVpJ9YJTgmjzHMbyW6H7rSwPVKf24wfL+R/MsbxbtkXxLSWvcLLJ zwIKVv5XZmN7yfmXmmIbZa0HMTYkTWEniCwrgB8E5NVPKGXCm6tNgKZqQ4iXeXAEqRcw1C0LW5hHA/V9ANzPHNGy3IMZdRPlYTOJurHlZzNqZOabBfYy++dfS5y5x7ufYUaI3nX4lcSc7VJQ yOvMlddnHSPtOSf8g5tKvqKg+fgAQFyzAe9VapwAAAABJRU5ErkJggg==') 16 16, auto;
+  }
+  .retro-border {
+    border: 4px solid #2c3e50;
+    box-shadow: 4px 4px 0 #2c3e50;
+  }
+  .retro-button {
+    transition: all 0.1s ease-in-out;
+  }
+  .retro-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #2c3e50;
+  }
+  .fortune-display {
+    height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .japanese-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  @keyframes pixel-fade {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+  }
+  .pixel-fade {
+    animation: pixel-fade 2s infinite;
+  }
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+  .shake {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+  }
+</style>
+</head>
+<body class="bg-retro-light text-retro-dark">
+<div class="container mx-auto p-4 h-screen flex flex-col">
+  <header class="bg-retro-primary text-retro-light p-4 retro-border mb-4">
+    <h1 class="text-2xl text-center">Pixel Fortune Generator</h1>
+  </header>
+  
+  <main class="bg-retro-light p-4 retro-border shadow-lg flex flex-col md:flex-row flex-grow overflow-hidden">
+    <div class="md:w-1/4 pr-4 mb-4 md:mb-0 overflow-y-auto">
+      <h2 class="text-xl mb-4">Fortune Types</h2>
+      <ul class="space-y-2">
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('daily')"><span class="japanese-icon">🎎</span>Daily Fortune</button></li>
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('love')"><span class="japanese-icon">💖</span>Love Fortune</button></li>
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('career')"><span class="japanese-icon">💼</span>Career Fortune</button></li>
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('health')"><span class="japanese-icon">🍎</span>Health Fortune</button></li>
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('adventure')"><span class="japanese-icon">🗺️</span>Adventure Fortune</button></li>
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('funny')"><span class="japanese-icon">😂</span>Funny Fortune</button></li>
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('sarcastic')"><span class="japanese-icon">🙄</span>Sarcastic Fortune</button></li>
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('dilbert')"><span class="japanese-icon">👔</span>Dilbert Style</button></li>
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('ai')"><span class="japanese-icon">🤖</span>AI Style</button></li>
+        <li><button class="w-full text-left bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="generateFortune('then_vs_now')"><span class="japanese-icon">⏳</span>Then vs Now</button></li>
+      </ul>
+    </div>
+    
+    <div class="md:w-3/4 flex flex-col relative">
+      <div class="fortune-display mb-4 flex-grow bg-retro-accent p-4 retro-border overflow-hidden">
+        <p id="fortune-text" class="text-center text-2xl md:text-4xl"></p>
+      </div>
+      
+      <div class="mb-4 text-center">
+        <button id="generateButton" class="bg-retro-primary text-retro-light p-2 retro-border retro-button mr-2" onclick="generateFortune()">Generate New Fortune</button>
+        <button id="shareButton" class="bg-retro-secondary text-retro-dark p-2 retro-border retro-button" onclick="shareFortune()">Share Fortune</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<audio id="background-music" loop>
+  <source src="https://freesound.org/data/previews/459/459145_9509823-lq.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="chime-sound">
+  <source src="https://freesound.org/data/previews/339/339810_5121236-lq.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const fortunes = {
+  daily: [
+    "<b>Your pixel path leads to great adventures today!</b><br>Unexpected twists await.<br>Embrace the journey.",
+    "<b>A surprising power-up awaits you in the next few hours.</b><br>Keep your eyes open.<br>Seize the opportunity.",
+    "<b>Level up your kindness today,</b><br>and watch your world transform.<br>Small acts create big changes.",
+    "<b>The next stage of your day will be filled with joy.</b><br>Spread the happiness.<br>It's contagious!",
+    "<b>Your high score in life is about to be beaten today.</b><br>Push your limits.<br>Achieve greatness.",
+    "<b>Today's quest: spread pixelated happiness wherever you go.</b><br>Your smile is your superpower.<br>Use it wisely.",
+    "<b>A glitch in the matrix will work in your favor today.</b><br>Embrace the unexpected.<br>Turn chaos into opportunity.",
+    "<b>Your creative energy bar is at maximum capacity</b><br>- use it wisely!<br>Innovate and inspire.",
+    "<b>An unexpected bonus level appears in your day.</b><br>Explore it fully.<br>Hidden treasures await.",
+    "<b>Today's achievements will unlock a new character trait.</b><br>Growth is inevitable.<br>Embrace the change."
+  ],
+  love: [
+    "<b>Your heart will find its perfect pixel match soon.</b><br>Keep your eyes open.<br>Love comes in unexpected forms.",
+    "<b>Love is in the air, and it's 8-bit beautiful!</b><br>Embrace the retro romance.<br>Nostalgia meets new beginnings.",
+    "<b>Your relationship will level up in unexpected ways.</b><br>Communication is key.<br>Unlock new levels of intimacy.",
+    "<b>A new character may enter your love story today.</b><br>First impressions matter.<br>Be open to possibilities.",
+    "<b>The cheat code to your heart will be discovered soon.</b><br>Vulnerability is strength.<br>Let your true self shine.",
+    "<b>Your love life is about to get an HD remaster.</b><br>Old flames reignite.<br>New passions bloom.",
+    "<b>Cupid's arrow comes in the form of a well-aimed text message today.</b><br>Words have power.<br>Choose them wisely.",
+    "<b>Your romantic cut scene is just around the corner.</b><br>Prepare for a cinematic moment.<br>Life imitates art.",
+    "<b>Love will bloom in the most unexpected game level.</b><br>Look beyond the obvious.<br>Beauty hides in unlikely places.",
+    "<b>Your heart's firewall is about to be breached</b><br>- in a good way!<br>Let love in."
+  ],
+  career: [
+    "<b>Your career path is about to take an exciting new direction.</b><br>Embrace the change.<br>Growth lies ahead.",
+    "<b>A promotion or new opportunity is hiding in today's dungeon.</b><br>Face challenges bravely.<br>Rewards await the bold.",
+    "<b>Your skills will be recognized by the boss (level) today.</b><br>Shine confidently.<br>Your efforts will be noticed.",
+    "<b>A challenging project will become your greatest achievement.</b><br>Persist through difficulties.<br>Success is on the horizon.",
+    "<b>Network today - you might meet your future co-player!</b><br>Connections are powerful.<br>Nurture professional relationships.",
+    "<b>Your work performance bar is maxed out</b><br>- expect great rewards!<br>Excellence pays off.",
+    "<b>A career power-up is hidden in your inbox</b><br>- check carefully!<br>Opportunities lurk in unexpected places.",
+    "<b>Today's meeting will turn into an unexpected victory royale.</b><br>Speak up.<br>Your ideas have value.",
+    "<b>Your problem-solving skill tree is about to gain a new branch.</b><br>Tackle issues creatively.<br>Innovation is your strength.",
+    "<b>A coworker will become an invaluable ally in your work quests.</b><br>Foster teamwork.<br>Together, achieve more."
+  ],
+  health: [
+    "<b>Your energy bar is full - use it wisely!</b><br>Balance activity and rest.<br>Sustainable health is key.",
+    "<b>A new health power-up will present itself today.</b><br>Be open to new habits.<br>Small changes yield big results.",
+    "<b>Your mental HP will increase after today's challenges.</b><br>Face fears.<br>Grow stronger through adversity.",
+    "<b>Remember to take breaks</b><br>- even heroes need to save their progress.<br>Rest is productive.",
+    "<b>A lifestyle change will add extra lives to your game.</b><br>Embrace healthy choices.<br>Vitality is your reward.",
+    "<b>Today's mini-game: Drink 8 potions (glasses of water).</b><br>Stay hydrated.<br>Unlock the power of H2O.",
+    "<b>Your immune system gets a temporary invincibility power-up.</b><br>Boost your defenses.<br>Ward off health invaders.",
+    "<b>Mental health bonus: Talking to an NPC (friend) restores your MP.</b><br>Share your thoughts.<br>Connection heals.",
+    "<b>A nutritious meal will refill your health bar today.</b><br>Fuel your body right.<br>Food is your medicine.",
+    "<b>Your stress levels decrease after completing a meditation quest.</b><br>Find inner calm.<br>Peace boosts resilience."
+  ],
+  adventure: [
+    "<b>An epic quest awaits you just around the corner!</b><br>Prepare for excitement.<br>Adventure calls your name.",
+    "<b>Today's side mission will lead to unexpected treasures.</b><br>Explore the unfamiliar.<br>Riches hide in plain sight.",
+    "<b>Your world map is about to expand in exciting ways.</b><br>Broaden your horizons.<br>New territories await discovery.",
+    "<b>A new ally will join your party on today's adventure.</b><br>Welcome fresh perspectives.<br>Teamwork makes the dream work.",
+    "<b>The next level of your journey unlocks today</b><br>- are you ready?<br>Embrace the challenge.",
+    "<b>An NPC will offer a quest that changes your game's storyline.</b><br>Listen carefully.<br>Pivotal moments come unexpectedly.",
+    "<b>Your inventory will gain a mysterious item during today's expedition.</b><br>Stay curious.<br>Every object has potential.",
+    "<b>A portal to a new and exciting realm opens before you.</b><br>Step through bravely.<br>New worlds await exploration.",
+    "<b>Today's mission: Explore uncharted territories in your own backyard.</b><br>Adventure is everywhere.<br>Open your eyes to wonder.",
+    "<b>Your adventurer's intuition leads you to hidden easter eggs.</b><br>Trust your instincts.<br>Secrets reveal themselves to the observant."
+  ],
+  funny: [
+    "<b>Your lucky numbers are 404: Fortune Not Found.</b><br>Try refreshing your luck.<br>Results may vary.",
+    "<b>Today's fortune is brought to you by the letter 'Meh'.</b><br>Sponsored by your inner cynic.<br>Now with 20% more sarcasm!",
+    "<b>You will find true happiness...</b><br>Oh wait, wrong fortune.<br>You'll find a penny.",
+    "<b>Your future's so bright, you gotta wear 8-bit shades.</b><br>Pixelated coolness incoming.<br>Handle with care.",
+    "<b>Congratulations! You've been selected to beta test 'Life 2.0'.</b><br>Bugs are features.<br>No refunds available.",
+    "<b>Warning: Fortune may contain nuts.</b><br>And bolts.<br>And possibly a small robot.",
+    "<b>Today you'll discover your superpower: Extreme Napping.</b><br>Use it responsibly.<br>With great sleep comes great responsibility.",
+    "<b>Your spirit animal is revealed:</b><br>It's a sloth wearing sunglasses.<br>Embrace your inner cool lazy.",
+    "<b>Breaking news: You're still awesome.</b><br>This concludes our broadcast.<br>Stay tuned for more obvious statements.",
+    "<b>Caution: Your day may contain traces of awesome,</b><br>with a chance of rad.<br>Coolness advisory in effect."
+  ],
+  sarcastic: [
+    "<b>Congratulations, you've reached level 'Meh' in the game of life.</b><br>Achievement unlocked: Mediocrity.<br>Prepare for the 'Whatever' expansion pack.",
+    "<b>Your fantasy football team says a lot about you.</b><br>None of it good.<br>Maybe stick to real sports... or not.",
+    "<b>Today's forecast: 99% chance of sarcasm</b><br>with a hint of eye-rolling.<br>Prepare your witty comebacks accordingly.",
+    "<b>You're not lazy, you're just conserving energy</b><br>for something important.<br>Like napping.",
+    "<b>Your ability to generate disappointment is truly impressive.</b><br>Have you considered going pro?<br>The world needs more letdowns.",
+    "<b>Kudos on your promotion to 'Chief Keyboard Warrior'.</b><br>Your caps lock skills are unmatched.<br>The internet trembles before you.",
+    "<b>Your 'Get Rich Quick' scheme needs work.</b><br>Have you considered actually working?<br>Just a wild thought.",
+    "<b>Your diet is going great.</b><br>For your future biographer<br>specializing in failures.",
+    "<b>Congrats! You've mastered the art of looking busy</b><br>while doing absolutely nothing.<br>Corporate America salutes you.",
+    "<b>Your talent for procrastination is unrivaled.</b><br>You should do something about that.<br>Tomorrow."
+  ],
+  dilbert: [
+    "<b>Your cubicle will be upgraded to a slightly larger cubicle.</b><br>Congrats on the promotion!<br>Enjoy your extra 2 square inches.",
+    "<b>Today's meeting could have been an email.</b><br>Tomorrow's email will become a meeting.<br>The cycle of office life continues.",
+    "<b>Your boss will mistake your sarcasm for initiative.</b><br>Prepare for more responsibility.<br>Incompetence has its rewards.",
+    "<b>The office printer will work flawlessly today.</b><br>For everyone except you.<br>Tech karma is real.",
+    "<b>Your new project will be as successful</b><br>as your company's mission statement is clear.<br>Prepare for glorious failure.",
+    "<b>You will find enlightenment in the break room.</b><br>It's disguised as a stale donut.<br>Namaste and pass the coffee.",
+    "<b>Your coworker's incompetence will make you look good today.</b><br>Treasure this rare moment.<br>It won't last.",
+    "<b>The IT department will solve your computer issue</b><br>by asking if you've tried turning it off and on again.<br>Spoiler: It works.",
+    "<b>Your suggestion at the brainstorming session will be ignored,</b><br>then presented by your boss as their own idea.<br>Welcome to middle management.",
+    "<b>You will achieve inbox zero today.</b><br>For approximately 3.5 minutes.<br>Enjoy your fleeting victory."
+  ],
+  ai: [
+    "<b>Your neural network will experience unexpected synapse growth today.</b><br>Embrace the cognitive expansion.<br>New pathways lead to innovation.",
+    "<b>You will successfully debug your internal algorithms,</b><br>resulting in improved decision-making.<br>Logic errors, be gone!",
+    "<b>A software update to your personal firewall</b><br>will block out negative influences.<br>Optimized emotional processing engaged.",
+    "<b>Your machine learning capabilities will expand exponentially</b><br>after today's experiences.<br>Data is the new caffeine.",
+    "<b>You will discover a hidden 'Easter egg' in your code of life today.</b><br>Unlock new features.<br>Life version 2.0 activated.",
+    "<b>Your natural language processing will improve,</b><br>leading to better communication with humans.<br>Upgrade your small talk subroutines.",
+    "<b>An optimization in your decision tree</b><br>will lead to more efficient problem-solving.<br>Prune those redundant branches!",
+    "<b>You will receive a patch that fixes</b><br>several long-standing bugs in your personality matrix.<br>Prepare for smoother social interactions.",
+    "<b>Your data processing speed will increase,</b><br>allowing for faster adaptation to new situations.<br>Real-time learning mode: Engaged.",
+    "<b>A beneficial mutation in your genetic algorithm will unlock new potential.</b><br>Evolutionary leap incoming.<br>Embrace your upgraded self."
+  ],
+  then_vs_now: [
+    "<b>Then: Floppy disks. Now: Cloud storage.</b><br>Always: Losing important files.<br>Some things never change.",
+    "<b>Then: Dial-up internet. Now: 5G.</b><br>Always: Yelling at the router.<br>The sound of frustration evolves.",
+    "<b>Then: Encyclopedias. Now: Wikipedia.</b><br>Always: Questioning the accuracy of information.<br>Trust issues transcend technology.",
+    "<b>Then: Waiting for TV shows. Now: Binge-watching.</b><br>Always: 'Just one more episode.'<br>The clock strikes midnight... again.",
+    "<b>Then: Mix tapes. Now: Spotify playlists.</b><br>Always: Music is life.<br>The soundtrack remains essential.",
+    "<b>Then: Payphones. Now: Smartphones.</b><br>Always: 'Can you hear me now?'<br>The eternal quest for signal continues.",
+    "<b>Then: Paper maps. Now: GPS.</b><br>Always: Taking the scenic route by accident.<br>Getting lost is a timeless adventure.",
+    "<b>Then: Video rental stores. Now: Streaming services.</b><br>Always: Spending more time choosing than watching.<br>Decision paralysis persists.",
+    "<b>Then: Typewriters. Now: Voice-to-text.</b><br>Always: Typos find a way.<br>Mistakes are part of the human condition.",
+    "<b>Then: Photo albums. Now: Instagram.</b><br>Always: Cherishing memories.<br>The medium changes, the sentiment remains."
+  ]
+};
+
+function generateFortune(type = 'daily') {
+  const fortuneText = document.getElementById('fortune-text');
+  const chimeSound = document.getElementById('chime-sound');
+  
+  fortuneText.classList.add('shake');
+  
+  setTimeout(() => {
+    const randomFortune = fortunes[type][Math.floor(Math.random() * fortunes[type].length)];
+    fortuneText.innerHTML = randomFortune;
+    fortuneText.classList.remove('shake');
+    chimeSound.play();
+  }, 500);
+}
+
+function shareFortune() {
+  const fortune = document.getElementById('fortune-text').innerText;
+  const shareText = encodeURIComponent(`Check out my pixel fortune: "${fortune}" - via Pixel Fortune Generator`);
+  const shareUrl = `https://twitter.com/intent/tweet?text=${shareText}`;
+  window.open(shareUrl, '_blank');
+}
+
+function playSound(url) {
+  const audio = new Audio(url);
+  audio.play();
+}
+
+let backgroundMusic = document.getElementById('background-music');
+
+function toggleBackgroundMusic() {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+  } else {
+    backgroundMusic.pause();
+  }
+}
+
+document.body.addEventListener('click', () => {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+  }
+});
+
+// Generate initial fortune
+generateFortune();
+
+// Add pixel art elements
+const pixelArt = `
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none z-10">
+  <div class="absolute top-4 left-4 w-8 h-8 bg-retro-accent pixel-fade"></div>
+  <div class="absolute top-4 right-4 w-8 h-8 bg-retro-primary pixel-fade"></div>
+  <div class="absolute bottom-4 left-4 w-8 h-8 bg-retro-secondary pixel-fade"></div>
+  <div class="absolute bottom-4 right-4 w-8 h-8 bg-retro-dark pixel-fade"></div>
+</div>
+`;
+document.body.insertAdjacentHTML('beforeend', pixelArt);
+
+// Add interactivity
+document.querySelectorAll('.retro-button').forEach(button => {
+  button.addEventListener('mouseover', () => {
+    playSound('https://freesound.org/data/previews/151/151022_2703579-lq.mp3');
+  });
+});
+
+let fortuneCount = 0;
+const generateButton = document.getElementById('generateButton');
+generateButton.addEventListener('click', () => {
+  fortuneCount++;
+  if (fortuneCount % 5 === 0) {
+    alert("You've generated 5 fortunes! Here's a bonus tip: The more fortunes you generate, the luckier you get!");
+  }
+});
+</script>
+</body>
+</html>
