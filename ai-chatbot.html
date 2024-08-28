@@ -237,12 +237,12 @@ for (let i = 0; i < 5; i++) {
 sendButton.addEventListener('click', () => {
     const message = userInput.value.trim();
     if (message) {
-        appendMessage({ id: 'user1', name: 'You', avatar: 'https://ai-discovery-hub.com/user-avatar.png' }, message);
+        appendMessage({ id: 'user1', name: 'You', avatar: 'https://sidbhat.github.io/1.png' }, message);
         userInput.value = '';
         
         // Simple bot response
         setTimeout(() => {
-            const botUser = { id: 'bot', name: 'AI Assistant', avatar: 'https://ai-discovery-hub.com/bot-avatar.png' };
+            const botUser = { id: 'bot', name: 'AI Assistant', avatar: 'https://sidbhat.github.io/2.png' };
             let botReply = "Thanks for your message! ";
 
             if (message.toLowerCase().includes("hello") || message.toLowerCase().includes("hi")) {
