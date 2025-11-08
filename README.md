@@ -1,203 +1,103 @@
-# Siddharth Bhat's Personal Website
+# AI Intelligence Digests
 
-A Jekyll-based personal website and blog hosted on GitHub Pages, showcasing projects and sharing technical insights.
+Simple static site showcasing AI news digests from the repository.
 
 ## 🌐 Live Site
 
-Visit the site at: [https://sidbhat.github.io](https://sidbhat.github.io)
+Visit: [https://sidbhat.github.io](https://sidbhat.github.io)
 
-## ✨ Features
+## 📋 Overview
 
-- **Dynamic Project Showcase**: Automatically fetches and displays GitHub repositories using the GitHub API
-- **Blog Platform**: Write posts in Markdown with categories and tags
-- **Responsive Design**: Mobile-friendly layout that works on all devices
-- **SEO Optimized**: Built-in SEO tags for better search engine visibility
-- **RSS Feed**: Subscribe to blog updates via RSS
+This site automatically displays AI intelligence digest markdown files from your repository in a clean, SAP UI5-inspired interface.
 
-## 🏗️ Built With
+## 🎨 Features
 
-- [Jekyll](https://jekyllrb.com/) - Static site generator
-- [GitHub Pages](https://pages.github.com/) - Free hosting
-- Vanilla JavaScript - Dynamic repository fetching
-- CSS3 - Modern, responsive styling
+- **SAP Fiori/UI5 Design**: Clean, professional interface inspired by SAP design system
+- **Automatic Digest Loading**: Fetches .md files from your repository using GitHub API
+- **Simple & Fast**: No complex build process, just HTML/CSS/JS
+- **Responsive**: Works on all devices
 
-## 📁 Project Structure
+## 📁 Structure
 
 ```
 sidbhat.github.io/
-├── _config.yml              # Jekyll configuration
-├── _layouts/                # Page templates
-│   ├── default.html         # Base template
-│   └── post.html           # Blog post template
-├── _posts/                  # Blog posts (Markdown)
-├── _includes/               # Reusable components
+├── index.html              # Main page
 ├── assets/
 │   ├── css/
-│   │   └── style.css       # Main stylesheet
-│   ├── js/
-│   │   └── main.js         # JavaScript (GitHub API integration)
-│   └── images/             # Images and media
-├── projects/                # Project showcase pages
-├── index.html              # Homepage
-├── blog.html               # Blog listing
-├── projects.html           # Projects page
-├── about.md                # About page
-├── Gemfile                 # Ruby dependencies
-└── README.md               # This file
+│   │   └── style.css      # SAP-inspired styling
+│   └── js/
+│       └── main.js        # Digest fetching logic
+├── Downloads/
+│   └── daily-digest/      # Your AI digest markdown files go here
+└── README.md
 ```
 
-## 🚀 Getting Started
+## 🚀 How It Works
 
-### Prerequisites
+1. The site uses GitHub API to fetch markdown files from `Downloads/daily-digest/`
+2. Displays them as cards with date, size, and download links
+3. Files are sorted by date (newest first)
+4. Clicking "View Digest" opens the file on GitHub
+5. "Download" button downloads the markdown file
 
-- Ruby (version 2.7 or higher)
-- Bundler
-- Git
+## 📝 Adding New Digests
 
-### Local Development
+Simply commit your markdown digest files to:
+```
+Downloads/daily-digest/YYYY-MM-DD-digest-title.md
+```
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/sidbhat/sidbhat.github.io.git
-   cd sidbhat.github.io
-   ```
+The site will automatically pick them up and display them.
 
-2. **Install dependencies**:
-   ```bash
-   bundle install
-   ```
+## 🔧 Configuration
 
-3. **Run locally**:
-   ```bash
-   bundle exec jekyll serve
-   ```
+To change the repository or path where digests are stored, edit `assets/js/main.js`:
 
-4. **View in browser**:
-   Open [http://localhost:4000](http://localhost:4000)
-
-The site will automatically reload when you make changes to files.
-
-## ✍️ Writing Blog Posts
-
-1. Create a new file in `_posts/` following the naming convention:
-   ```
-   YYYY-MM-DD-title-of-post.md
-   ```
-
-2. Add front matter at the top:
-   ```yaml
-   ---
-   layout: post
-   title: "Your Post Title"
-   date: 2025-01-08
-   categories: [tutorial, technical]
-   tags: [python, ai, machine-learning]
-   ---
-   ```
-
-3. Write your content in Markdown below the front matter
-
-4. Commit and push to publish
+```javascript
+const username = 'sidbhat';           // Your GitHub username
+const repoName = 'sidbhat.github.io'; // Repository name
+const digestsPath = 'Downloads/daily-digest'; // Path to digests
+```
 
 ## 🎨 Customization
 
-### Update Personal Information
-
-Edit `_config.yml` to update:
-- Your name and description
-- Email and social links
-- Site URL
-
-### Modify Styling
-
-Edit `assets/css/style.css` to customize:
-- Colors (CSS variables at the top)
-- Layout and spacing
-- Responsive breakpoints
-
-### Change GitHub Username
-
-Update the username in `assets/js/main.js`:
-```javascript
-const username = 'sidbhat';  // Change this
+### Colors
+Edit CSS variables in `assets/css/style.css`:
+```css
+:root {
+    --sap-blue: #0070f2;
+    --sap-dark-blue: #0854a0;
+    /* ... other colors */
+}
 ```
+
+### Content
+Edit `index.html` to change:
+- Page title
+- Header text
+- Introduction content
 
 ## 📦 Deployment
 
-The site is automatically deployed via GitHub Pages when you push to the `main` branch.
+Already deployed! The site is live at `https://sidbhat.github.io`
 
-### Manual Deployment Steps
+Any push to the `main` branch automatically updates the live site.
 
-1. **Create GitHub repository** named `yourusername.github.io`
-
-2. **Initialize Git** (if not already done):
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   ```
-
-3. **Connect to GitHub**:
-   ```bash
-   git remote add origin https://github.com/sidbhat/sidbhat.github.io.git
-   git branch -M main
-   git push -u origin main
-   ```
-
-4. **Enable GitHub Pages**:
-   - Go to repository Settings
-   - Navigate to Pages section
-   - Source: Deploy from branch `main`
-   - Save
-
-5. **Wait for deployment** (usually 1-2 minutes)
-
-6. **Visit your site**: `https://yourusername.github.io`
-
-## 🛠️ Maintenance
-
-### Updating Jekyll
+## 🔄 Updates
 
 ```bash
-bundle update jekyll
+# Make changes, then:
+git add .
+git commit -m "Update digests"
+git push origin main
 ```
 
-### Adding New Plugins
-
-1. Add to `_config.yml`:
-   ```yaml
-   plugins:
-     - jekyll-new-plugin
-   ```
-
-2. Add to `Gemfile`:
-   ```ruby
-   gem "jekyll-new-plugin"
-   ```
-
-3. Run:
-   ```bash
-   bundle install
-   ```
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🤝 Contributing
-
-While this is a personal website, suggestions and feedback are welcome! Feel free to open an issue or reach out.
+Changes appear live in 1-2 minutes.
 
 ## 📧 Contact
 
-- **GitHub**: [@sidbhat](https://github.com/sidbhat)
-- **Email**: Update in `_config.yml`
-
-## 🙏 Acknowledgments
-
-- Jekyll and GitHub Pages for providing free hosting
-- The open-source community for inspiration and tools
+GitHub: [@sidbhat](https://github.com/sidbhat)
 
 ---
 
-**Built with ❤️ using Jekyll and GitHub Pages**
+**Built with simple HTML/CSS/JS** • **Styled with SAP Fiori/UI5 design principles**
