@@ -1,0 +1,88 @@
+---
+layout: default
+title: Home
+---
+
+<section class="hero">
+    <h1>Hi, I'm {{ site.title }}</h1>
+    <p class="lead">{{ site.description }}</p>
+    <div class="hero-cta">
+        <a href="{{ '/blog/' | relative_url }}" class="btn btn-primary">Read My Blog</a>
+        <a href="{{ '/projects/' | relative_url }}" class="btn btn-secondary">View Projects</a>
+    </div>
+</section>
+
+<section class="featured-projects">
+    <h2>Featured Projects</h2>
+    <div id="github-repos" class="repo-grid">
+        <div class="loading">Loading projects from GitHub...</div>
+    </div>
+</section>
+
+<section class="recent-posts">
+    <h2>Recent Blog Posts</h2>
+    <div class="post-list">
+        {% for post in site.posts limit:3 %}
+        <article class="post-preview">
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <div class="post-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+                {% if post.categories %}
+                <span class="post-categories">
+                    {% for category in post.categories %}
+                    <span class="category">#{{ category }}</span>
+                    {% endfor %}
+                </span>
+                {% endif %}
+            </div>
+            <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+            <a href="{{ post.url | relative_url }}" class="read-more">Read more →</a>
+        </article>
+        {% endfor %}
+    </div>
+    <div class="view-all">
+        <a href="{{ '/blog/' | relative_url }}" class="btn btn-secondary">View All Posts →</a>
+    </div>
+</section>
+
+<section class="skills">
+    <h2>Skills & Technologies</h2>
+    <div class="skills-grid">
+        <div class="skill-category">
+            <h3>Languages</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">Java</span>
+            </div>
+        </div>
+        <div class="skill-category">
+            <h3>AI & ML</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">Deep Learning</span>
+                <span class="skill-tag">NLP</span>
+                <span class="skill-tag">Computer Vision</span>
+            </div>
+        </div>
+        <div class="skill-category">
+            <h3>Web Development</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">REST APIs</span>
+            </div>
+        </div>
+        <div class="skill-category">
+            <h3>Tools & Platforms</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Linux</span>
+            </div>
+        </div>
+    </div>
+</section>

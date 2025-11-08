@@ -1,0 +1,59 @@
+title: Siddharth Bhat
+email: your.email@example.com
+description: >-
+  Software Engineer | AI Enthusiast | Technical Writer
+  Exploring the intersection of AI, software development, and innovation.
+baseurl: ""
+url: "https://sidbhat.github.io"
+github_username: sidbhat
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Pagination
+paginate: 10
+paginate_path: "/blog/page:num/"
+
+# Permalink structure
+permalink: /blog/:year/:month/:day/:title/
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# Exclude files from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Blog
+    url: /blog/
+  - title: Projects
+    url: /projects/
+  - title: About
+    url: /about/
+
+# Social links
+social:
+  github: sidbhat
+  linkedin: # Add your LinkedIn username if you have one
+  twitter: # Add your Twitter handle if you have one
+
+# Google Analytics (optional)
+# google_analytics: UA-XXXXXXXXX-X
